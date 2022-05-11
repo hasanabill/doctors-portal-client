@@ -9,9 +9,9 @@ const Info = () => {
 
     return (
         <div className='py-5 grid grid-cols-1 lg:grid-cols-3 gap-5'>
-            <InfoCard bgClass='bg-gradient-to-r from-secondary to-primary' cardTitle='Opening Hours' img={clock}></InfoCard>
-            <InfoCard bgClass='bg-accent' cardTitle='Visit Our Location' img={marker}></InfoCard>
-            <InfoCard bgClass='bg-gradient-to-r from-secondary to-primary' cardTitle='Contact us Now' img={phone}></InfoCard>
+            <InfoCard bgclassName='bg-gradient-to-r from-secondary to-primary' cardTitle='Opening Hours' img={clock}></InfoCard>
+            <InfoCard bgclassName='bg-accent' cardTitle='Visit Our Location' img={marker}></InfoCard>
+            <InfoCard bgclassName='bg-gradient-to-r from-secondary to-primary' cardTitle='Contact us Now' img={phone}></InfoCard>
         </div>
     );
 };
