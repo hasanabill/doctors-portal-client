@@ -4,9 +4,9 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from "react-hook-form";
 import Loading from './../Shared/Loading';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useToken from './../../hooks/useToken';
 
 const SignUp = () => {
-
     const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
@@ -17,6 +17,8 @@ const SignUp = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [token] = useToken(user || guser)
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -32,8 +34,7 @@ const SignUp = () => {
     }
 
     let from = location.state?.from?.pathname || "/";
-    if (guser || user) {
-        console.log(guser || user)
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -44,7 +45,7 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(email, password)
         await updateProfile({ displayName: name })
         console.log('updated')
-        navigate('/home')
+        // navigate('/home')
     };
 
     return (
