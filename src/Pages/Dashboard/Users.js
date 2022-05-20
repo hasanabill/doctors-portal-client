@@ -6,12 +6,12 @@ import UserRow from './UserRow';
 const Users = () => {
     // const [users, setUsers] = useState([])
     // useEffect(() => {
-    //     fetch('http://localhost:5000/users')
+    //     fetch('https://fathomless-hamlet-23429.herokuapp.com/users')
     //         .then(res => res.json())
     //         .then(data => setUsers(data))
     // }, [])
 
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/users', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://fathomless-hamlet-23429.herokuapp.com/users', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
