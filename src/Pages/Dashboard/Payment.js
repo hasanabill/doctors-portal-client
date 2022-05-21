@@ -4,12 +4,13 @@ import { useQuery } from 'react-query';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
+import Loading from './../Shared/Loading';
 
 const stripePromise = loadStripe('pk_test_51L1iSLIOOXdauHLGUW2zSFSUq4WF6jqUkSiKwa9PlEQJjemRhzK0O3X9x8HpXnhnK5H20PuQAWle5QFawxztO3OE00y9yo0JPV');
 
 const Payment = () => {
     const { id } = useParams();
-    const url = `http://localhost:5000/booking/${id}`
+    const url = `https://fathomless-hamlet-23429.herokuapp.com/booking/${id}`
 
     const { data: appoinment, isLoading } = useQuery(['booking', id], () => fetch(url, {
         method: 'GET',
@@ -19,23 +20,23 @@ const Payment = () => {
     }).then(res => res.json()))
 
     if (isLoading) {
-        return <isLoading></isLoading>
+        return <Loading></Loading>
     }
 
     return (
         <div>
-            <div class="card w-50 max-w-md bg-base-100 shadow-xl my-12">
-                <div class="card-body">
+            <div className="card w-50 max-w-md bg-base-100 shadow-xl my-12">
+                <div className="card-body">
                     <p className="text-success font-bold">Hello, {appoinment.patientName}</p>
-                    <h2 class="card-title">Please Pay for {appoinment.treatment}</h2>
+                    <h2 className="card-title">Please Pay for {appoinment.treatment}</h2>
                     <p>Your Appoinment: {appoinment.date} at {appoinment.slot}</p>
                     <p>Please Pay: ${appoinment.price}</p>
                 </div>
             </div>
-            <div class="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
-                <div class="card-body">
+            <div className="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
+                <div className="card-body">
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm />
+                        <CheckoutForm appoinment={appoinment} />
                     </Elements>
                 </div>
             </div>
